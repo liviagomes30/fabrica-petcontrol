@@ -1,0 +1,13 @@
+# Fábrica (Claude Code): segredos e artefatos locais
+.claude/settings.local.json
+.claude/logs/
+.claude/guard-error.log
+
+# Variáveis de ambiente (apenas .env.example é versionado)
+.env
+.env.*
+!.env.example
+
+# Dependências e IDE
+node_modules/
+.idea/

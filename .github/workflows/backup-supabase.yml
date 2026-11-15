@@ -1,0 +1,81 @@
+name: Backup do banco (Supabase)
+
+# Backup semanal do schema `public` via pg_dump, comprimido e criptografado
+# (AES-256), publicado como GitHub Release — fora do Supabase, para
+# sobreviver a perda de acesso à conta ou erro humano (ex: DELETE sem WHERE).
+# Ver docs/backup-e-restauracao.md para o passo a passo de restauração.
+
+on:
+  schedule:
+    - cron: "0 5 * * 1" # toda segunda-feira às 05:00 UTC (~02:00 em Brasília)
+  workflow_dispatch: {} # permite rodar manualmente em Actions > Run workflow
+
+permissions:
+  contents: write # necessário para publicar a Release
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Instalar cliente PostgreSQL 17 e GnuPG
+        # O runner traz por padrao o postgresql-client do repositorio do
+        # Ubuntu (hoje, versao 16), mais antigo que o Postgres 17 do
+        # Supabase — e pg_dump se recusa a rodar contra um servidor mais
+        # novo que ele. Instala a versao 17 do repositorio oficial do PGDG.
+        # Se o Supabase mudar a major version do Postgres, atualize aqui.
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends gnupg curl ca-certificates
+          sudo install -d /usr/share/postgresql-common/pgdg
+          sudo curl -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.asc --fail https://www.postgresql.org/media/keys/ACCC4CF8.asc
+          . /etc/os-release
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.asc] https://apt.postgresql.org/pub/repos/apt ${VERSION_CODENAME}-pgdg main" \
+            | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends postgresql-client-17
+
+      - name: Gerar dump, comprimir e criptografar
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_DB_URL }}
+          PASSPHRASE: ${{ secrets.BACKUP_ENCRYPTION_PASSPHRASE }}
+          PGSSLMODE: require
+        run: |
+          set -euo pipefail
+
+          if [ -z "${DATABASE_URL:-}" ]; then
+            echo "::error::Secret SUPABASE_DB_URL não configurado. Veja docs/backup-e-restauracao.md."
+            exit 1
+          fi
+          if [ -z "${PASSPHRASE:-}" ]; then
+            echo "::error::Secret BACKUP_ENCRYPTION_PASSPHRASE não configurado. Veja docs/backup-e-restauracao.md."
+            exit 1
+          fi
+
+          STAMP="$(date -u +'%Y-%m-%d')"
+          FILENAME="petcontrol-backup-${STAMP}.sql.gz.gpg"
+
+          # --schema=public: só os dados da aplicação. Os schemas internos do
+          # Supabase (auth, storage, realtime...) não são restauráveis fora
+          # dele e o usuário do dump normalmente não tem permissão neles.
+          # Caminho explicito: o runner ja vem com um pg_dump mais antigo em
+          # /usr/bin, e nao queremos depender de qual versao o PATH resolve.
+          /usr/lib/postgresql/17/bin/pg_dump "$DATABASE_URL" \
+            --schema=public \
+            --no-owner \
+            --no-privileges \
+            | gzip \
+            | gpg --symmetric --cipher-algo AES256 --batch --yes --passphrase "$PASSPHRASE" -o "$FILENAME"
+
+          echo "STAMP=$STAMP" >> "$GITHUB_ENV"
+          echo "FILENAME=$FILENAME" >> "$GITHUB_ENV"
+
+      - name: Publicar como Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: backup-${{ env.STAMP }}
+          name: "Backup ${{ env.STAMP }}"
+          body: |
+            Backup automático do schema `public` (pg_dump), comprimido e criptografado com AES-256.
+            Passo a passo de restauração: `docs/backup-e-restauracao.md`.
+          files: ${{ env.FILENAME }}
