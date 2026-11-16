@@ -51,6 +51,7 @@ function buildMessage(input) {
     `${icon} *Fábrica de Software* · ${LABEL[agent] || agent} concluiu a tarefa`,
     `• STATUS: \`${status}\`${parecer ? ` · PARECER: \`${parecer}\`` : ""}`,
   ];
+  if (!field(text, "STATUS")) lines[1] = "• Terminou sem o bloco STATUS (retorno fora do formato; confira o resultado no Claude Code)";
   if (branch) lines.push(`• Branch: \`${branch}\``);
   if (bloqueios && !/^nenhum$/i.test(bloqueios)) lines.push(`• Bloqueios: ${bloqueios}`);
   if (proximo) lines.push(`• Próximo: ${proximo}`);
@@ -58,6 +59,7 @@ function buildMessage(input) {
 }
 
 async function main(input) {
+  if (input.agent_type === "fabrica-orquestrador") return; // não é subagente e não devolve bloco STATUS
   const msg = buildMessage(input);
   const webhook = process.env.SLACK_WEBHOOK_URL;
   let sent = "skipped (SLACK_WEBHOOK_URL ausente)";

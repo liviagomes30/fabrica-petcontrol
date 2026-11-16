@@ -29,7 +29,11 @@
       "Bash(pytest*)",
       "Bash(specify *)",
       "Bash(ls*)",
-      "Bash(cat *)"
+      "Bash(cat *)",
+      "Bash(powershell * .specify/scripts/powershell/*)",
+      "Bash(pwsh * .specify/scripts/powershell/*)",
+      "Bash(.specify/scripts/powershell/*)",
+      "Bash(./.specify/scripts/powershell/*)"
     ],
     "ask": [
       "Agent(fabrica-arquiteto)"

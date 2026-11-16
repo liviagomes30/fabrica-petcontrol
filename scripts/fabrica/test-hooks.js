@@ -118,7 +118,13 @@ const r = run(SLACK, {
 const depois = fs.existsSync(outbox) ? fs.readFileSync(outbox, "utf8").split("\n").length : 0;
 const slackOk = r.status === 0 && depois > antes;
 if (!slackOk) falhas++;
+const antes2 = fs.readFileSync(outbox, "utf8").split("\n").length;
+run(SLACK, { hook_event_name: "SubagentStop", agent_type: "fabrica-orquestrador", last_assistant_message: "x" });
+const depois2 = fs.readFileSync(outbox, "utf8").split("\n").length;
+const ignoraOrq = antes2 === depois2;
+if (!ignoraOrq) falhas++;
+console.log((ignoraOrq ? "ok   " : "FAIL ") + "slack-notify ignora o orquestrador");
 console.log(`${slackOk ? "ok  " : "FAIL"} slack-notify grava no outbox`);
 
-console.log(falhas ? `\n${falhas} falha(s)` : `\nTodos os ${casos.length + 1} testes passaram`);
+console.log(falhas ? `\n${falhas} falha(s)` : `\nTodos os ${casos.length + 2} testes passaram`);
 process.exit(falhas ? 1 : 0);
