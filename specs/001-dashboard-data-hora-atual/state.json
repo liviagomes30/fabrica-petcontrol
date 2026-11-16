@@ -1,0 +1,19 @@
+{
+  "feature": "001-dashboard-data-hora-atual",
+  "base_branch": "main",
+  "branch": "001-dashboard-data-hora-atual",
+  "gh_path": "/c/Program Files/GitHub CLI/gh.exe",
+  "pull_request": null,
+  "commands": {},
+  "last_reviewed_commit": null,
+  "stage": "AGUARDANDO_REVISAO_HUMANA",
+  "artifacts": {
+    "specs/001-dashboard-data-hora-atual/spec.md": "E1",
+    "specs/001-dashboard-data-hora-atual/checklists/requirements.md": "E1"
+  },
+  "gates": {},
+  "tasks_done": [],
+  "blockers": [],
+  "human_checkpoints": {"specification_review": {"status": "pendente"}, "merge_approval": {"status": "pendente"}},
+  "updated_at": "2026-11-15T21:02:51-03:00"
+}
