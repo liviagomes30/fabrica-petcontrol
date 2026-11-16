@@ -8,6 +8,12 @@
 
 **Input**: User description: "Na tela do dashboard, mostrar a data e hora atuais no formato pt-BR, em vermelho, no fuso America/Sao_Paulo."
 
+## Clarifications
+
+### Session 2026-11-15
+
+- Q: Contra qual referência o SC-001 deve medir a hora exibida? → A: Contra o relógio do dispositivo convertido para America/Sao_Paulo, pois não há sincronização com servidor; fica removida a exigência de diferença máxima em relação ao horário oficial de Brasília.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Ver data e hora atuais no dashboard (Priority: P1)
@@ -16,7 +22,7 @@ O voluntário da ONG autenticado abre o dashboard e vê, em local visível da te
 
 **Why this priority**: É o objetivo central da demanda: dar ao voluntário a referência de data e hora corretas sem sair da tela principal, evitando erros em registros que dependem do dia (tratamentos, agenda, adoções).
 
-**Independent Test**: Abrir o dashboard autenticado e comparar o texto exibido com um relógio de referência no horário de Brasília; conferir o formato dd/MM/aaaa HH:mm:ss e a cor vermelha.
+**Independent Test**: Abrir o dashboard autenticado e comparar o texto exibido com o relógio do dispositivo convertido para America/Sao_Paulo; conferir o formato dd/MM/aaaa HH:mm:ss e a cor vermelha.
 
 **Acceptance Scenarios**:
 
@@ -32,7 +38,7 @@ Com o dashboard aberto por tempo prolongado, a hora exibida acompanha o tempo re
 
 **Why this priority**: Um horário parado induz a erro; porém o valor básico da P1 já existe sem a atualização contínua.
 
-**Independent Test**: Manter o dashboard aberto por 1 minuto e verificar que os segundos avançam e o horário continua coincidindo com o relógio de referência.
+**Independent Test**: Manter o dashboard aberto por 1 minuto e verificar que os segundos avançam e o horário continua coincidindo com o relógio do dispositivo convertido para America/Sao_Paulo.
 
 **Acceptance Scenarios**:
 
@@ -69,10 +75,10 @@ Não há entidades de dados: a funcionalidade apenas exibe o instante atual e n�
 
 ### Measurable Outcomes
 
-- **SC-001**: Em 100% das aberturas do dashboard, a data e a hora exibidas diferem em no máximo 1 segundo do horário oficial de Brasília.
+- **SC-001**: Em 100% das aberturas do dashboard, a data e a hora exibidas coincidem (diferença de no máximo 1 segundo) com o relógio do dispositivo convertido para o fuso America/Sao_Paulo.
 - **SC-002**: O horário exibido está correto para o fuso America/Sao_Paulo mesmo quando o dispositivo está configurado em outro fuso (verificado com ao menos dois fusos diferentes).
 - **SC-003**: Um voluntário localiza a data e a hora na tela em até 3 segundos após abrir o dashboard.
-- **SC-004**: Após 5 minutos com o dashboard aberto, o horário exibido continua dentro de 1 segundo do horário de referência.
+- **SC-004**: Após 5 minutos com o dashboard aberto, o horário exibido continua dentro de 1 segundo do relógio do dispositivo convertido para America/Sao_Paulo.
 - **SC-005**: O texto atende a razão de contraste mínima de 4,5:1 contra o fundo em tema claro (e em tema escuro, se existir).
 
 ## Assumptions
@@ -81,6 +87,6 @@ Não há entidades de dados: a funcionalidade apenas exibe o instante atual e n�
 - O formato exato é dd/MM/aaaa HH:mm:ss, com hora em 24 horas; fuso e idioma são fixos e não configuráveis pelo usuário.
 - A posição exata na tela (por exemplo, cabeçalho ou topo do conteúdo) fica a critério do projeto de interface, desde que visível sem rolagem em telas de desktop.
 - O tom de vermelho exato não é definido; deve ser um vermelho legível, preferencialmente o de destaque já usado pelo sistema, respeitado o contraste mínimo.
-- A hora de referência é o relógio do dispositivo corrigido para o fuso America/Sao_Paulo; não é exigida sincronização com servidor de horário.
+- A hora de referência é o relógio do dispositivo convertido para o fuso America/Sao_Paulo; não há sincronização com servidor de horário, e portanto não se exige precisão em relação ao horário oficial de Brasília (um relógio do dispositivo errado reflete-se na exibição).
 - Atualização a cada segundo (com segundos exibidos) é adotada por ser a leitura natural de "hora atual"; fora de escopo: alarmes, calendário, outros fusos e alteração do restante do dashboard.
 - Alinha-se à constituição do projeto: datas e horas tratadas por um ponto único de lógica de data local, a ser detalhado no plano.
