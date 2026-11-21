@@ -1,0 +1,144 @@
+{
+  "feature": "002-saudacao-dashboard",
+  "base_branch": "main",
+  "branch": "002-saudacao-dashboard",
+  "gh_path": "gh",
+  "pull_request": "https://github.com/liviagomes30/fabrica-petcontrol/pull/2",
+  "commands": {
+    "test": "npm --prefix petcontrol-next run test",
+    "coverage": "npm --prefix petcontrol-next run test:coverage",
+    "lint": "npm --prefix petcontrol-next run lint",
+    "build": "npm --prefix petcontrol-next run build"
+  },
+  "last_reviewed_commit": "ba30c8e3afc7906a08e6e19633e0a13e93c937d1",
+  "stage": "AGUARDANDO_MERGE",
+  "artifacts": {
+    "specs/002-saudacao-dashboard/spec.md": "E1",
+    "specs/002-saudacao-dashboard/checklists/requirements.md": "E1",
+    "specs/002-saudacao-dashboard/plan.md": "E2",
+    "specs/002-saudacao-dashboard/research.md": "E2",
+    "specs/002-saudacao-dashboard/data-model.md": "E2",
+    "specs/002-saudacao-dashboard/quickstart.md": "E2",
+    "specs/002-saudacao-dashboard/contracts/saudacao-domain-api.md": "E2",
+    "specs/002-saudacao-dashboard/contracts/saudacao-ui.md": "E2",
+    "specs/002-saudacao-dashboard/tasks.md": "E3",
+    "petcontrol-next/tests/acceptance/dashboard-saudacao.test.tsx": "E4",
+    "petcontrol-next/tests/unit/dashboard/saudacao-dashboard.test.tsx": "E4",
+    "specs/002-saudacao-dashboard/notes/e4-roteiro-manual.md": "E4",
+    "petcontrol-next/lib/domain/data-local.ts": "E4",
+    "petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx": "E4",
+    "specs/002-saudacao-dashboard/review-report.md": "E5",
+    "specs/002-saudacao-dashboard/qa-report.md": "E6",
+    "specs/002-saudacao-dashboard/notes/e7-descricao-pr.md": "E7"
+  },
+  "gates": {
+    "E1": {
+      "devolucoes": 0,
+      "premissas": [
+        "Analista: faixas de horario (bom dia 05:00-11:59, boa tarde 12:00-17:59, boa noite 18:00-04:59) assumidas como premissa na spec"
+      ]
+    },
+    "E2": {
+      "devolucoes": 0,
+      "premissas": [
+        "Arquiteto: saudação como função pura em lib/domain/data-local.ts, exibida pelo RelogioBrasilia a partir do mesmo valor do relógio",
+        "Arquiteto: estilo text-sm font-medium text-gray-700 (contraste ~10:1)",
+        "update-agent-context ausente; contexto do agente não atualizado"
+      ]
+    },
+    "E3": {
+      "devolucoes": 0
+    },
+    "E3.5": {
+      "critical": 0,
+      "cobertura_fr": "9/9",
+      "premissas": [
+        "C1 (media): T012/T016 (aceite) criados pelo Desenvolvedor em E4 como versao inicial; QA valida e amplia em E6",
+        "I1 (baixa): T020 manual pode nao ser executavel por agente; QA cobre contraste e 360px",
+        "analise feita lendo os artefatos (check-prerequisites negado)"
+      ]
+    },
+    "E4": {
+      "devolucoes": 0,
+      "fase_atual": null,
+      "fases_concluidas": [
+        "Setup",
+        "Foundational",
+        "US1",
+        "US2",
+        "Polish"
+      ],
+      "premissas": [
+        "Desenvolvedor: T020 so parcialmente verificavel por agente (contraste 10,31:1 e 9,86:1 calculado; itens de navegador/fuso real/aba oculta/logout ficam para QA ou humano)"
+      ]
+    },
+    "E5": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "ressalvas": [
+        "Baixo: oraculo do teste das 24 horas repete a regra (data-local.test.ts:94-108)",
+        "Baixo: aceite escrito pelo Desenvolvedor; QA assume o arquivo",
+        "Sugestao: teste 'exatamente um dos tres textos' redundante",
+        "Sugestao: slice(11,13) por posicao fixa (R1 aceito no plano)"
+      ],
+      "revisao_testes_qa": {
+        "parecer": "aprovado com ressalvas",
+        "ressalvas": [
+          "E6-1 Baixo: teste de hidratacao sem try/finally",
+          "E6-2 Baixo: JSDoc de horaBrasilia incorreto e usa Intl como a implementacao",
+          "E6-3 Sugestao: alguns testes acoplados a classes CSS/codigo-fonte"
+        ]
+      }
+    },
+    "E6": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "ressalvas": [
+        "Itens de navegador do quickstart 3.1, 3.3-3.9 nao verificados por agente; humano deve executar (atencao 3.7 e 3.9) antes do merge",
+        "Aviso DYNAMIC_SERVER_USAGE em /produtos no build, fora do escopo, nao verificado na main",
+        "Testes em jsdom: contraste e layout verificados por tokens/classes"
+      ]
+    },
+    "E7": {
+      "devolucoes": 0,
+      "ci": "Lint, build e testes: pass (46s)"
+    }
+  },
+  "tasks_done": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008",
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019",
+    "T020"
+  ],
+  "blockers": [
+    "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado",
+    "E4/US1: subagente retornou 'placeholder' em vez do bloco de status; artefatos verificados no disco e comandos rodados pelo orquestrador (exit 0)"
+  ],
+  "human_checkpoints": {
+    "specification_review": {
+      "status": "aprovado",
+      "aprovado_em": "2026-11-21T00:00:00-03:00",
+      "mensagem": "Aprovo a especificação, pode seguir com o plano."
+    },
+    "merge_approval": {
+      "status": "pendente"
+    }
+  },
+  "updated_at": "2026-11-21T00:00:00-03:00"
+}
