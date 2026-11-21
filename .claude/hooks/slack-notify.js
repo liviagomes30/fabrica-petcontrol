@@ -24,8 +24,10 @@ const LABEL = {
 };
 
 function field(text, name) {
-  const m = text.match(new RegExp(`^\\s*${name}:\\s*(.+)$`, "mi"));
-  return m ? m[1].trim() : null;
+  // Tolera markdown no bloco de retorno: "**STATUS:** x", "- STATUS: x", "`STATUS: x`"
+  const re = new RegExp(`^[\\s>*_\`#-]*${name}[*_\`]*:[*_\`]*[\\s]*(.+)$`, "mi");
+  const m = text.match(re);
+  return m ? m[1].replace(/[*_\`]+$/g, "").trim() : null;
 }
 
 function git(cmd) {

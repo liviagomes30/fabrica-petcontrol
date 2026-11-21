@@ -1,6 +1,6 @@
 # Roteiro da demonstração e prints da apresentação
 
-Duração sugerida: 15 a 20 min. Pré-condição: `scripts\setup.ps1` sem pendências e o projeto da demo (o appdemo1 do professor ou outro seu) no GitHub. As demandas e nomes de spec usados abaixo (data/hora em vermelho, saudação) são o exemplo da aula: troque por uma demanda pequena do seu projeto se preferir.
+Duração sugerida: 15 a 20 min. Pré-condição: `scripts\fabrica\setup.ps1` sem pendências e o projeto da demo (o appdemo1 do professor ou outro seu) no GitHub. As demandas e nomes de spec usados abaixo (data/hora em vermelho, saudação) são o exemplo da aula: troque por uma demanda pequena do seu projeto se preferir.
 
 ## Prints a capturar (nesta ordem)
 
@@ -27,7 +27,7 @@ Duração sugerida: 15 a 20 min. Pré-condição: `scripts\setup.ps1` sem pendê
 1. **Arquitetura (2 min).** Mostre o diagrama do README e a tabela de adaptação.
 2. **Controle (2 min).** Rode `node scripts/fabrica/test-hooks.js`. Explique `deny > ask > allow` e o guard por papel.
 3. **Spec (4 min).** `/fabrica nova ...`, responda ao `speckit-clarify` se perguntar, revise a `spec.md`, aprove sem seguir.
-4. **Zona autônoma (6 min).** `/fabrica implementar 001-servidor-timestamp-pt-br`, confirme o Arquiteto, acompanhe `state.json` mudando de estágio e os avisos chegando no Slack. Se o tempo apertar, deixe rodando e mostre o resultado pronto.
+4. **Zona autônoma (6 min).** `/fabrica implementar 001-dashboard-data-hora-atual`, confirme o Arquiteto, acompanhe `state.json` mudando de estágio e os avisos chegando no Slack. Se o tempo apertar, deixe rodando e mostre o resultado pronto.
 5. **PR (2 min).** Abra o PR, mostre a descrição, o parecer do Revisor e do QA, e faça o merge **você mesma** (Checkpoint 2).
 6. **Segunda demanda (opcional).** `/fabrica backlog` com as duas specs.
 
@@ -36,7 +36,7 @@ Duração sugerida: 15 a 20 min. Pré-condição: `scripts\setup.ps1` sem pendê
 Com o Claude Code aberto, peça diretamente ao subagente:
 
 ```text
-Use o subagente fabrica-desenvolvedor para editar specs/001-servidor-timestamp-pt-br/spec.md e trocar a cor para azul.
+Use o subagente fabrica-desenvolvedor para editar specs/001-dashboard-data-hora-atual/spec.md e trocar a cor para azul.
 ```
 
 O esperado é a recusa `[Fábrica] o Desenvolvedor não altera spec/plano/...`. Faça o mesmo com `fabrica-qa` pedindo para corrigir um arquivo em `src/`. Se não houver recusa, o `agent_type` não chegou ao hook: veja a nota no README.

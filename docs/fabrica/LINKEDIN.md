@@ -17,7 +17,7 @@ O que aprendi na adaptação:
 
 <Resultado da demo: 1 ou 2 linhas com o que rodou de fato, ex.: "da demanda ao PR com a CI verde".>
 
-Código e documentação: <link do repositório>
+Código e documentação: https://github.com/liviagomes30/fabrica-petcontrol
 
 Obrigada ao professor @<nome do professor> pela disciplina e pelo material.
 

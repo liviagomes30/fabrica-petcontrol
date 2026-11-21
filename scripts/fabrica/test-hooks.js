@@ -124,7 +124,13 @@ const depois2 = fs.readFileSync(outbox, "utf8").split("\n").length;
 const ignoraOrq = antes2 === depois2;
 if (!ignoraOrq) falhas++;
 console.log((ignoraOrq ? "ok   " : "FAIL ") + "slack-notify ignora o orquestrador");
+const antes3 = fs.readFileSync(outbox, "utf8").split("\n").length;
+run(SLACK, { hook_event_name: "SubagentStop", agent_type: "fabrica-revisor-codigo", last_assistant_message: "Resumo.\n\n**STATUS:** DONE\n- **PARECER:** aprovado com ressalvas\n`BLOQUEIOS: nenhum`" });
+const ultimo = JSON.parse(fs.readFileSync(outbox, "utf8").trim().split("\n").pop());
+const mdOk = ultimo.status === "DONE" && ultimo.parecer === "aprovado com ressalvas" && fs.readFileSync(outbox, "utf8").split("\n").length > antes3;
+if (!mdOk) falhas++;
+console.log((mdOk ? "ok   " : "FAIL ") + "slack-notify lê STATUS e PARECER em markdown (obtido: " + ultimo.status + " / " + ultimo.parecer + ")");
 console.log(`${slackOk ? "ok  " : "FAIL"} slack-notify grava no outbox`);
 
-console.log(falhas ? `\n${falhas} falha(s)` : `\nTodos os ${casos.length + 2} testes passaram`);
+console.log(falhas ? `\n${falhas} falha(s)` : `\nTodos os ${casos.length + 3} testes passaram`);
 process.exit(falhas ? 1 : 0);
