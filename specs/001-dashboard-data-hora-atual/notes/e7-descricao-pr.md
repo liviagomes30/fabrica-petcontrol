@@ -52,7 +52,7 @@ Nenhum defeito Crítico, Alto ou Médio. Não verificável no ambiente de agente
 
 ## Pendências e riscos
 
-- **P1:** o CI (`.github/workflows/ci.yml`) roda lint e build, mas não roda `test`. Não alterado por restrição do projeto; recomenda-se incluir `npm run test` em PR separado com pedido explícito.
+- **P1 (resolvida):** o CI (`.github/workflows/ci.yml`) roda lint, build e `npm run test --if-present`; com o script `test` criado por esta feature, a CI passa a executar os testes (check "Lint, build e testes" verde). Nenhum workflow foi alterado.
 - **P2:** não há tema escuro ativo; revisar a cor se for ativado.
 - **P3:** script `update-agent-context` ausente; `CLAUDE.md` não registra o Vitest.
 - Itens manuais acima não verificados por agente.

@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": "e8903107970730fb057c4dfed3c5d29f4f6dee78",
-  "stage": "PUBLICANDO_PR",
+  "stage": "AGUARDANDO_MERGE",
   "artifacts": {
     "specs/001-dashboard-data-hora-atual/spec.md": "E1",
     "specs/001-dashboard-data-hora-atual/checklists/requirements.md": "E1",
@@ -82,7 +82,9 @@
       "revisao_testes_qa": "aprovado com ressalvas (T1-T5 baixo/sugestao)"
     },
     "E7": {
-      "devolucoes": 0
+      "devolucoes": 0,
+      "ci": "verde (Lint, build e testes)",
+      "obs": "P1 resolvida: ci.yml roda npm run test --if-present"
     }
   },
   "tasks_done": [
@@ -116,5 +118,5 @@
       "status": "pendente"
     }
   },
-  "updated_at": "2026-11-21T15:05:00-03:00"
+  "updated_at": "2026-11-21T15:20:00-03:00"
 }
