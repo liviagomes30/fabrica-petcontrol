@@ -84,3 +84,74 @@ Nenhum apontamento é Crítico, e não há violação da constituição. Nenhum 
 ## Parecer
 
 **Aprovado com ressalvas.** Não há apontamento Crítico nem violação da constituição. Os apontamentos B1, B2, B3 e S1 não bloqueiam e devem constar na descrição do PR, ou ser corrigidos pelo Desenvolvedor se o orquestrador decidir.
+
+---
+
+## Revisão dos testes de aceite do QA
+
+- **Etapa**: E6, revisão dos testes criados pelo QA (primeira rodada)
+- **Escopo**: somente `petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx` (commit `dc6aeac`). O código de produção não foi revisado de novo.
+- **Data**: 2026-11-21
+
+### Verificações executadas
+
+| Comando | Resultado |
+|---------|-----------|
+| `npm --prefix petcontrol-next run test` | saída 0; 3 arquivos, 56 testes passando (29 de aceite) |
+| `npm --prefix petcontrol-next run lint` | saída 0; nenhum aviso |
+
+### Avaliação por critério
+
+| Critério | Situação | Evidência |
+|----------|----------|-----------|
+| Determinismo | Conforme | Relógio falso em todos os testes (`beforeEach`, linhas 112-115). Nenhum teste depende do relógio real, do fuso da máquina nem da ordem de execução. Antes de verificar o texto, os testes de fuso conferem que a troca de `TZ` teve efeito (linha 156), o que resolve o B2 no aceite. |
+| Banco e rede reais | Conforme, com ressalva (T2) | `dashboard.actions` é mockado por inteiro (linhas 25-43). `dashboard.types` não importa Supabase. Nada lê `.env.local`. O espião de `fetch` deixa a implementação real ativa (ver T2). |
+| `any` e `as` | Conforme | Não há `any`. Os únicos `as` são `as const` (linhas 27 e 40), que estreitam o literal `success: true` para o tipo `ActionResult` e não silenciam o compilador. |
+| Código morto | Conforme | Todos os imports e helpers são usados. Há duas asserções redundantes, apontadas em T5. |
+| Pertinência dos asserts | Conforme, com ressalvas (T1, T3) | O oráculo `esperadoBrasilia` (linhas 58-65) calcula o horário por UTC-3 sem usar `Intl`, ou seja, é independente do mecanismo da implementação. Os testes de US1, US2, SC-001, SC-002, SC-004, do horário de verão e da aba oculta verificam valores concretos e falhariam com uma implementação errada. O de SC-005 calcula o contraste a partir dos tokens instalados do Tailwind. |
+| Limpeza de estado global | Conforme, com ressalva (T4) | `afterEach` (linhas 117-127) faz `cleanup`, restaura `TZ`, remove o `visibilityState` sobrescrito, volta aos timers reais e chama `restoreAllMocks`. No Vitest 3.2.7 instalado, `restoreAllMocks` também zera os `vi.fn` do `vi.mock` (`@vitest/spy`: `mockRestore` chama `mockReset`), e é por isso que `toHaveBeenCalledTimes(1)` (linhas 312-313) passa. |
+| Princípio IV | Conforme | Os testes são automatizados, entram no comando `npm --prefix petcontrol-next run test` e usam mocks do Supabase, sem acesso ao banco real. |
+
+### Apontamentos (ordenados por severidade)
+
+Nenhum apontamento é Crítico e não há violação da constituição. Nenhum bloqueia.
+
+#### T1. Baixo: o teste de SC-003 identifica o cabeçalho pela posição no DOM e pode dar falso positivo
+
+- **Arquivo/linha**: `petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx:189-191` (o mesmo padrão aparece em `:293`)
+- **Problema**: o cabeçalho é obtido como `titulo.parentElement?.parentElement`. Se o `<div>` que envolve o `<h1>` for removido numa refatoração, o "avô" do título passa a ser o contêiner da página inteira (`container mx-auto`). Nesse caso, `contains(relogio)` continua verdadeiro mesmo com o relógio no rodapé, e o teste de SC-003 passa sem garantir nada. O teste da linha 294 (`flex-col`) pegaria essa mudança, mas por acaso, e não por desenho. Além disso, `expect(cabecalho).toBeDefined()` (linha 190) aceita `null` e não verifica nada.
+- **Impacto**: o teste perde força como guarda de regressão de FR-001 e SC-003.
+- **Correção sugerida**: verificar que o relógio e o bloco do título são irmãos no mesmo contêiner, com `expect(relogio.parentElement).toBe(titulo.parentElement?.parentElement)`, ou usar `relogio.closest("div")?.contains(titulo)`. Trocar `toBeDefined()` por `not.toBeNull()` ou remover essa linha.
+
+#### T2. Baixo: o espião de `fetch` não bloqueia a rede real
+
+- **Arquivo/linha**: `petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx:301`
+- **Problema**: `vi.spyOn(globalThis, "fetch")` sem implementação mantém o `fetch` real. Se uma regressão fizer o componente chamar a rede, o teste falha, mas antes disso faz uma requisição de verdade. Isso contraria a regra de que os testes não usam rede.
+- **Impacto**: risco de acesso à rede real apenas no cenário de regressão. Hoje nenhum `fetch` é chamado.
+- **Correção sugerida**: `vi.spyOn(globalThis, "fetch").mockRejectedValue(new Error("rede bloqueada no teste"))`, mantendo a asserção `not.toHaveBeenCalled()`.
+
+#### T3. Sugestão: o teste de hidratação só detecta o mismatch se o React o registrar via `console.error`
+
+- **Arquivo/linha**: `petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx:255-261`
+- **Problema**: no React 19, quando a hidratação falha por diferença de texto, o React renderiza de novo no cliente e informa o erro por `onRecoverableError`, que por padrão usa `reportError`. Esse erro só chega ao espião de `console.error` se o console virtual do jsdom o repassar. Se não repassar, uma regressão que mostre a hora já no servidor passaria no teste, porque depois da renderização no cliente o texto final fica correto (linha 262).
+- **Correção sugerida**: passar um espião explícito, `hydrateRoot(container, <RelogioBrasilia />, { onRecoverableError: erroRecuperavel })`, e afirmar `expect(erroRecuperavel).not.toHaveBeenCalled()`, além do espião de `console.error`.
+
+#### T4. Sugestão: a limpeza manual do teste de hidratação e a contagem das actions dependem de detalhes do ambiente
+
+- **Arquivo/linha**: `petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx:250-269` e `:312-313`
+- **Problema**: (a) o `container` anexado ao `document.body` e a raiz hidratada só são desmontados se todas as asserções passarem. Se uma falhar, eles ficam no DOM, porque o `cleanup()` da Testing Library não os conhece, e podem afetar os `getByTestId` dos testes seguintes (erro de "múltiplos elementos"). (b) A contagem `toHaveBeenCalledTimes(1)` depende de `restoreAllMocks` zerar os `vi.fn` do `vi.mock`, o que vale no Vitest 3 mas deixa de valer no Vitest 4. Numa atualização, o teste falharia porque `DashboardPage` também é chamada nos testes das linhas 184 e 289.
+- **Correção sugerida**: (a) envolver as asserções em `try { ... } finally { act(() => raiz?.unmount()); container.remove(); }`. (b) Chamar `vi.clearAllMocks()` no `beforeEach`, ou `vi.mocked(buscarEstatisticasDashboard).mockClear()` no início do teste.
+
+#### T5. Sugestão: asserções redundantes
+
+- **Arquivo/linha**: `petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx:236` e `:245`
+- **Problema**: a linha 236 repete, com o oráculo, o valor literal já conferido na linha 235. Na linha 245, a regex já está coberta pela da linha 246, que é mais ampla.
+- **Correção sugerida**: remover uma das duas asserções em cada caso. Não muda a cobertura.
+
+### Observação sobre as inspeções estáticas
+
+Os testes de FR-006 e FR-007 (linhas 316-343) buscam strings no código-fonte, como `getUser()` e `redirect("/login")`. Isso é aceitável como evidência estrutural, já que não há teste de navegador autenticado (qa-report, seção 5). Eles podem falhar sem que haja regressão se a guarda do layout for reescrita, por exemplo para usar `requireUser()`. Nesse caso, devem ser atualizados junto com a mudança. Isto não é um apontamento.
+
+### Parecer dos testes de aceite
+
+**Aprovado com ressalvas.** Os testes são determinísticos, não acessam o banco nem a rede reais nas execuções atuais, não usam `any` nem `as` para silenciar o compilador, restauram o estado global e verificam os critérios da spec com oráculo independente. T1 e T2 (Baixos) e T3 a T5 (Sugestões) não bloqueiam e devem constar na descrição do PR, ou ser corrigidos pelo QA se o orquestrador decidir.
