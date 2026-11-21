@@ -28,7 +28,8 @@
     "petcontrol-next/lib/domain/data-local.ts": "E4",
     "petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx": "E4",
     "specs/002-saudacao-dashboard/review-report.md": "E5",
-    "specs/002-saudacao-dashboard/qa-report.md": "E6"
+    "specs/002-saudacao-dashboard/qa-report.md": "E6",
+    "specs/002-saudacao-dashboard/notes/e7-descricao-pr.md": "E7"
   },
   "gates": {
     "E1": {
