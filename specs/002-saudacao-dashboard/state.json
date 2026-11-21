@@ -3,7 +3,7 @@
   "base_branch": "main",
   "branch": "002-saudacao-dashboard",
   "gh_path": "gh",
-  "pull_request": null,
+  "pull_request": "https://github.com/liviagomes30/fabrica-petcontrol/pull/2",
   "commands": {
     "test": "npm --prefix petcontrol-next run test",
     "coverage": "npm --prefix petcontrol-next run test:coverage",
@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": "ba30c8e3afc7906a08e6e19633e0a13e93c937d1",
-  "stage": "PUBLICANDO_PR",
+  "stage": "AGUARDANDO_MERGE",
   "artifacts": {
     "specs/002-saudacao-dashboard/spec.md": "E1",
     "specs/002-saudacao-dashboard/checklists/requirements.md": "E1",
@@ -98,6 +98,10 @@
         "Aviso DYNAMIC_SERVER_USAGE em /produtos no build, fora do escopo, nao verificado na main",
         "Testes em jsdom: contraste e layout verificados por tokens/classes"
       ]
+    },
+    "E7": {
+      "devolucoes": 0,
+      "ci": "Lint, build e testes: pass (46s)"
     }
   },
   "tasks_done": [
