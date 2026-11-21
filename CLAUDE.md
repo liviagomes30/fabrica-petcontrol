@@ -128,7 +128,6 @@ Este repositório roda a Fábrica de Software da disciplina no Claude Code. O ag
 - Só o humano aprova a spec (Checkpoint 1) e faz o merge (Checkpoint 2). Nunca faça merge, force push ou deploy.
 - Anotações de controle vão em `specs/<feature>/notes/`, nunca na raiz.
 - `.specify/` e `specs/` ficam na **raiz do repositório**, não dentro de `petcontrol-next/`.
-- Documentação da fábrica: `docs/fabrica/`.
 
 ## Projeto: Pet Control (ONG SalvaCão)
 
