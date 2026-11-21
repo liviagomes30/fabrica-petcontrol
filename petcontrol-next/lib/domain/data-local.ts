@@ -33,6 +33,11 @@ const formatadorBrasilia = new Intl.DateTimeFormat("pt-BR", {
   hourCycle: "h23",
 });
 
+/** Milissegundos até o próximo segundo cheio do relógio; sempre entre 1 e 1000. */
+export function msAteProximoSegundo(instante: Date): number {
+  return 1000 - instante.getMilliseconds();
+}
+
 /** Formata o instante como `dd/MM/aaaa HH:mm:ss` no fuso de Brasília, independente do fuso do dispositivo. */
 export function formatarDataHoraBrasilia(instante: Date): string {
   const partes: Record<string, string> = {};

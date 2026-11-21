@@ -5,6 +5,7 @@ import {
   dataParaISOLocal,
   formatarDataHoraBrasilia,
   hojeLocal,
+  msAteProximoSegundo,
 } from "@/lib/domain/data-local";
 
 const CASOS: ReadonlyArray<readonly [string, string]> = [
@@ -40,6 +41,28 @@ describe("formatarDataHoraBrasilia", () => {
       }
     },
   );
+});
+
+describe("msAteProximoSegundo", () => {
+  it.each([
+    [250, 750],
+    [0, 1000],
+    [999, 1],
+    [1, 999],
+  ])("com %i ms faltam %i ms", (ms, esperado) => {
+    const instante = new Date("2026-11-15T17:35:07.000Z");
+    instante.setMilliseconds(ms);
+    expect(msAteProximoSegundo(instante)).toBe(esperado);
+  });
+
+  it("sempre devolve um valor entre 1 e 1000", () => {
+    for (let ms = 0; ms < 1000; ms++) {
+      const instante = new Date(2026, 10, 15, 12, 0, 0, ms);
+      const espera = msAteProximoSegundo(instante);
+      expect(espera).toBeGreaterThanOrEqual(1);
+      expect(espera).toBeLessThanOrEqual(1000);
+    }
+  });
 });
 
 describe("FUSO_BRASILIA e agora", () => {

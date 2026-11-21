@@ -1,20 +1,42 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { agora, formatarDataHoraBrasilia } from "@/lib/domain/data-local";
+import {
+  agora,
+  formatarDataHoraBrasilia,
+  msAteProximoSegundo,
+} from "@/lib/domain/data-local";
 
 const MARCADOR = "--/--/---- --:--:--";
 
 type Ouvinte = () => void;
 
 function criarStore() {
-  const ouvintes = new Set<Ouvinte>();
-
   return {
     subscribe(ouvinte: Ouvinte) {
-      ouvintes.add(ouvinte);
+      let temporizador: ReturnType<typeof setTimeout> | undefined;
+
+      // Cada disparo recalcula a hora a partir do relógio, sem contador, para não derivar.
+      const agendar = () => {
+        temporizador = setTimeout(() => {
+          ouvinte();
+          agendar();
+        }, msAteProximoSegundo(agora()));
+      };
+
+      const aoMudarVisibilidade = () => {
+        if (document.visibilityState !== "visible") return;
+        clearTimeout(temporizador);
+        ouvinte();
+        agendar();
+      };
+
+      document.addEventListener("visibilitychange", aoMudarVisibilidade);
+      agendar();
+
       return () => {
-        ouvintes.delete(ouvinte);
+        clearTimeout(temporizador);
+        document.removeEventListener("visibilitychange", aoMudarVisibilidade);
       };
     },
     getSnapshot: () => formatarDataHoraBrasilia(agora()),
