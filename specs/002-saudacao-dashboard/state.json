@@ -6,14 +6,32 @@
   "pull_request": null,
   "commands": {},
   "last_reviewed_commit": null,
-  "stage": "AGUARDANDO_REVISAO_HUMANA",
+  "stage": "PLANEJANDO",
   "artifacts": {
     "specs/002-saudacao-dashboard/spec.md": "E1",
     "specs/002-saudacao-dashboard/checklists/requirements.md": "E1"
   },
-  "gates": {"E1": {"devolucoes": 0, "premissas": ["Analista: faixas de horario (bom dia 05:00-11:59, boa tarde 12:00-17:59, boa noite 18:00-04:59) assumidas como premissa na spec"]}},
+  "gates": {
+    "E1": {
+      "devolucoes": 0,
+      "premissas": [
+        "Analista: faixas de horario (bom dia 05:00-11:59, boa tarde 12:00-17:59, boa noite 18:00-04:59) assumidas como premissa na spec"
+      ]
+    }
+  },
   "tasks_done": [],
-  "blockers": ["Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado"],
-  "human_checkpoints": {"specification_review": {"status": "pendente"}, "merge_approval": {"status": "pendente"}},
+  "blockers": [
+    "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado"
+  ],
+  "human_checkpoints": {
+    "specification_review": {
+      "status": "aprovado",
+      "aprovado_em": "2026-11-21T00:00:00-03:00",
+      "mensagem": "Aprovo a especificação, pode seguir com o plano."
+    },
+    "merge_approval": {
+      "status": "pendente"
+    }
+  },
   "updated_at": "2026-11-21T00:00:00-03:00"
 }
