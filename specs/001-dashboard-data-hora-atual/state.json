@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": null,
-  "stage": "REVISANDO",
+  "stage": "TESTANDO",
   "artifacts": {
     "specs/001-dashboard-data-hora-atual/spec.md": "E1",
     "specs/001-dashboard-data-hora-atual/checklists/requirements.md": "E1",
@@ -22,7 +22,8 @@
     "specs/001-dashboard-data-hora-atual/contracts/data-local-api.md": "E2",
     "specs/001-dashboard-data-hora-atual/contracts/relogio-brasilia-ui.md": "E2",
     "specs/001-dashboard-data-hora-atual/tasks.md": "E3",
-    "specs/001-dashboard-data-hora-atual/notes/e4-roteiro-manual.md": "E4"
+    "specs/001-dashboard-data-hora-atual/notes/e4-roteiro-manual.md": "E4",
+    "specs/001-dashboard-data-hora-atual/review-report.md": "E5"
   },
   "gates": {
     "E2": {
@@ -60,6 +61,16 @@
         "Desenvolvedor: vitest ^3.2.7 (v4/v5 incompativeis com npm local/@types/node 20), @vitejs/plugin-react ^4.7.0, passWithNoTests temporario",
         "Aviso de lint em coverage/ a corrigir via ignore no eslint.config.mjs"
       ]
+    },
+    "E5": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "ressalvas": [
+        "B1 dateTime com segunda leitura do relogio (baixo)",
+        "B2 testes de troca de TZ nao confirmam efeito (baixo)",
+        "B3 .gitkeep sem uso (baixo)",
+        "S1 falta teste de hidratacao sem mismatch (sugestao)"
+      ]
     }
   },
   "tasks_done": [
@@ -93,5 +104,5 @@
       "status": "pendente"
     }
   },
-  "updated_at": "2026-11-21T13:50:00-03:00"
+  "updated_at": "2026-11-21T14:10:00-03:00"
 }
