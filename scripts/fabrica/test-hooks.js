@@ -6,14 +6,17 @@
 const { spawnSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
 
 const ROOT = path.resolve(__dirname, "..", "..");
 const GUARD = path.join(ROOT, ".claude", "hooks", "guard.js");
 const SLACK = path.join(ROOT, ".claude", "hooks", "slack-notify.js");
 const env = { ...process.env, CLAUDE_PROJECT_DIR: ROOT, SLACK_WEBHOOK_URL: "" };
+// Os testes do Slack gravam numa pasta temporária: nunca tocam o log real em .claude/logs.
+const TMP = fs.mkdtempSync(path.join(os.tmpdir(), "fabrica-hooks-"));
 
 function run(script, input) {
-  return spawnSync("node", [script], { input: JSON.stringify(input), encoding: "utf8", env });
+  return spawnSync("node", [script], { input: JSON.stringify(input), encoding: "utf8", env: script === SLACK ? { ...env, CLAUDE_PROJECT_DIR: TMP } : env });
 }
 
 function bloqueado(r) {
@@ -108,7 +111,7 @@ for (const [nome, entrada, esperado] of casos) {
 }
 
 // slack-notify: deve gravar no outbox mesmo sem webhook
-const outbox = path.join(ROOT, ".claude", "logs", "slack-outbox.jsonl");
+const outbox = path.join(TMP, ".claude", "logs", "slack-outbox.jsonl");
 const antes = fs.existsSync(outbox) ? fs.readFileSync(outbox, "utf8").split("\n").length : 0;
 const r = run(SLACK, {
   hook_event_name: "SubagentStop",
@@ -130,7 +133,13 @@ const ultimo = JSON.parse(fs.readFileSync(outbox, "utf8").trim().split("\n").pop
 const mdOk = ultimo.status === "DONE" && ultimo.parecer === "aprovado com ressalvas" && fs.readFileSync(outbox, "utf8").split("\n").length > antes3;
 if (!mdOk) falhas++;
 console.log((mdOk ? "ok   " : "FAIL ") + "slack-notify lê STATUS e PARECER em markdown (obtido: " + ultimo.status + " / " + ultimo.parecer + ")");
+run(SLACK, { hook_event_name: "SubagentStop", agent_type: "fabrica-qa", last_assistant_message: "Testes passaram <ok> & lint 0." });
+const u4 = JSON.parse(fs.readFileSync(outbox, "utf8").trim().split("\n").pop());
+const resumoOk = u4.status === "sem bloco STATUS" && u4.text.includes("Resumo: Testes passaram &lt;ok&gt; &amp; lint 0.") && !u4.text.includes(":warning:") && u4.diag && u4.diag.tamanho_msg > 0;
+if (!resumoOk) falhas++;
+console.log((resumoOk ? "ok   " : "FAIL ") + "slack-notify resume a mensagem quando falta o STATUS, sem alarme");
 console.log(`${slackOk ? "ok  " : "FAIL"} slack-notify grava no outbox`);
 
-console.log(falhas ? `\n${falhas} falha(s)` : `\nTodos os ${casos.length + 3} testes passaram`);
+console.log(falhas ? `\n${falhas} falha(s)` : `\nTodos os ${casos.length + 4} testes passaram`);
+fs.rmSync(TMP, { recursive: true, force: true });
 process.exit(falhas ? 1 : 0);

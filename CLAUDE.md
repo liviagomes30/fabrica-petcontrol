@@ -147,13 +147,15 @@ Reescrita do sistema de gestão da ONG (resgates, adoções, estoque, tratamento
 - Validação de entrada com Zod, no `_schemas/` do módulo.
 - Datas e horas pelo helper de `lib/domain/data-local.ts`, não por `new Date()` espalhado.
 
-**Comandos de verificação.** Existem `lint` e `build`; **não existe framework de testes nem script `test`**.
+**Comandos de verificação** (todos saem com código 0 na `main`; o CI roda lint, build e test):
 ```bash
 npm --prefix petcontrol-next ci
 npm --prefix petcontrol-next run lint
 npm --prefix petcontrol-next run build
+npm --prefix petcontrol-next run test            # Vitest (vitest run)
+npm --prefix petcontrol-next run test:coverage   # exige 100% de linhas e funções em lib/domain/data-local.ts
 ```
-O comando de teste é obrigatório para a fábrica (o orquestrador reprova o plano sem ele). Portanto o primeiro `plan.md` precisa prever a configuração de um framework de testes (sugestão, a confirmar pelo Arquiteto: Vitest) e declarar o comando completo. A constituição deve registrar essa lacuna.
+Os testes ficam em `petcontrol-next/tests/`: `unit/` espelha a estrutura do código (por exemplo `unit/lib/domain/` e `unit/dashboard/`) e `acceptance/` guarda os testes de aceite do QA. O ambiente é jsdom com Testing Library, e testes nunca acessam o Supabase real. O plano de toda feature deve declarar o comando de teste.
 
 **Segredos e ambiente.** `petcontrol-next/.env.local` guarda `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY`. Nunca commitar, ler para os artefatos ou editar: só `.env.example` (sem valores reais) é versionado. Testes usam mocks ou stubs do Supabase, nunca o banco real.
 

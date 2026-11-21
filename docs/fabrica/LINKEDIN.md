@@ -15,7 +15,7 @@ O que aprendi na adaptação:
 🔹 **Quem verifica não deve ser o mesmo que produziu.** Revisor, QA e Desenvolvedor usam modelos diferentes para reduzir erros correlacionados.
 🔹 **Observabilidade.** Cada subagente avisa no Slack quando termina, por um hook, sem depender de o modelo lembrar.
 
-<Resultado da demo: 1 ou 2 linhas com o que rodou de fato, ex.: "da demanda ao PR com a CI verde".>
+Resultado: rodei a fábrica de ponta a ponta numa feature real (um relógio de data e hora no dashboard de um app Next.js com Supabase): da especificação ao pull request com CI verde, 56 testes automatizados e 100% de cobertura no módulo de datas. O merge foi meu, como manda o processo.
 
 Código e documentação: https://github.com/liviagomes30/fabrica-petcontrol
 
