@@ -3,7 +3,7 @@
   "base_branch": "main",
   "branch": "001-dashboard-data-hora-atual",
   "gh_path": "/c/Program Files/GitHub CLI/gh.exe",
-  "pull_request": null,
+  "pull_request": "https://github.com/liviagomes30/fabrica-petcontrol/pull/1",
   "commands": {
     "test": "npm --prefix petcontrol-next run test",
     "coverage": "npm --prefix petcontrol-next run test:coverage",
@@ -25,7 +25,8 @@
     "specs/001-dashboard-data-hora-atual/notes/e4-roteiro-manual.md": "E4",
     "specs/001-dashboard-data-hora-atual/review-report.md": "E5",
     "specs/001-dashboard-data-hora-atual/qa-report.md": "E6",
-    "petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx": "E6"
+    "petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx": "E6",
+    "specs/001-dashboard-data-hora-atual/notes/e7-descricao-pr.md": "E7"
   },
   "gates": {
     "E2": {
@@ -79,6 +80,9 @@
       "parecer": "aprovado com ressalvas",
       "nao_verificavel": "login real/Supabase, layout 360px, SC-003 visual, override de fuso no DevTools (qa-report secao 5)",
       "revisao_testes_qa": "aprovado com ressalvas (T1-T5 baixo/sugestao)"
+    },
+    "E7": {
+      "devolucoes": 0
     }
   },
   "tasks_done": [
@@ -112,5 +116,5 @@
       "status": "pendente"
     }
   },
-  "updated_at": "2026-11-21T14:55:00-03:00"
+  "updated_at": "2026-11-21T15:05:00-03:00"
 }
