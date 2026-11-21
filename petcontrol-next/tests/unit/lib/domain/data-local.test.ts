@@ -6,6 +6,8 @@ import {
   formatarDataHoraBrasilia,
   hojeLocal,
   msAteProximoSegundo,
+  saudacaoDaDataHoraBrasilia,
+  saudacaoPorHora,
 } from "@/lib/domain/data-local";
 
 const CASOS: ReadonlyArray<readonly [string, string]> = [
@@ -87,4 +89,58 @@ describe("hojeLocal e dataParaISOLocal", () => {
     vi.setSystemTime(new Date(2026, 10, 15, 22, 30));
     expect(hojeLocal()).toBe("2026-11-15");
   });
+});
+
+describe("saudacaoPorHora", () => {
+  it.each(
+    Array.from({ length: 24 }, (_, hora) => {
+      const esperado =
+        hora >= 5 && hora <= 11
+          ? "Bom dia"
+          : hora >= 12 && hora <= 17
+            ? "Boa tarde"
+            : "Boa noite";
+      return [hora, esperado] as const;
+    }),
+  )("hora %i resulta em %s", (hora, esperado) => {
+    expect(saudacaoPorHora(hora)).toBe(esperado);
+  });
+});
+
+describe("saudacaoDaDataHoraBrasilia", () => {
+  it.each([
+    ["21/11/2026 04:59:59", "Boa noite"],
+    ["21/11/2026 05:00:00", "Bom dia"],
+    ["21/11/2026 11:59:59", "Bom dia"],
+    ["21/11/2026 12:00:00", "Boa tarde"],
+    ["21/11/2026 17:59:59", "Boa tarde"],
+    ["21/11/2026 18:00:00", "Boa noite"],
+  ])("texto %s resulta em %s", (texto, esperado) => {
+    expect(saudacaoDaDataHoraBrasilia(texto)).toBe(esperado);
+  });
+
+  const INSTANTES: ReadonlyArray<readonly [string, string]> = [
+    ["2026-11-21T14:59:59Z", "Bom dia"],
+    ["2026-11-21T15:00:00Z", "Boa tarde"],
+    ["2026-11-21T07:59:59Z", "Boa noite"],
+    ["2026-11-21T08:00:00Z", "Bom dia"],
+  ];
+
+  it.each(INSTANTES)("compõe com formatarDataHoraBrasilia em %s", (iso, esperado) => {
+    expect(
+      saudacaoDaDataHoraBrasilia(formatarDataHoraBrasilia(new Date(iso))),
+    ).toBe(esperado);
+  });
+
+  it.each(["Asia/Tokyo", "America/New_York"])(
+    "independe do fuso do dispositivo (%s)",
+    (tz) => {
+      process.env.TZ = tz;
+      for (const [iso, esperado] of INSTANTES) {
+        expect(
+          saudacaoDaDataHoraBrasilia(formatarDataHoraBrasilia(new Date(iso))),
+        ).toBe(esperado);
+      }
+    },
+  );
 });
