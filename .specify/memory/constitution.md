@@ -1,3 +1,14 @@
+<!--
+Sync Impact Report
+Version change: 1.0.0 → 1.0.1 (PATCH)
+Modified principles: IV. Testes Automatizados Obrigatórios (sem renomear) — removida a frase de que
+  o projeto não tem framework de testes; declarados Vitest/jsdom/Testing Library e os comandos
+  `test` e `test:coverage`.
+Added sections: nenhuma
+Removed sections: nenhuma
+Deferred TODOs: nenhum
+-->
+
 # Pet Control Constitution
 
 Sistema de gestão da ONG SalvaCão (resgates, adoções, estoque, tratamentos; cerca de 10
@@ -48,10 +59,9 @@ malformada na fronteira.
   `lib/domain/` e as Server Actions (incluindo o caso não autenticado e o caso de entrada inválida).
 - Testes MUST NOT acessar o banco real do Supabase; o cliente Supabase MUST ser substituído por
   mocks ou stubs.
-- Hoje o projeto não tem framework de testes nem script `test`. O primeiro `plan.md` MUST
-  configurar o framework (sugestão, a confirmar pelo Arquiteto: Vitest), adicionar o script `test`
-  ao `package.json` e declarar o comando completo (ex.: `npm --prefix petcontrol-next run test`).
-  Todo plano posterior MUST declarar o comando de teste.
+- O projeto usa Vitest com jsdom e Testing Library. O comando de teste é
+  `npm --prefix petcontrol-next run test` e o de cobertura é
+  `npm --prefix petcontrol-next run test:coverage`. Todo plano MUST declarar o comando de teste.
 - Um plano sem comando de teste declarado MUST ser reprovado.
 
 Justificativa: sem testes, a fábrica não tem como verificar automaticamente que uma feature cumpre
@@ -146,4 +156,4 @@ Justificativa: a aprovação humana é o controle final sobre o que entra em pro
   QA MUST verificar os princípios aplicáveis. Exceções MUST ser justificadas por escrito no plano.
 - Orientação operacional de runtime: `CLAUDE.md` e `docs/fabrica/`.
 
-**Version**: 1.0.0 | **Ratified**: 2026-11-15 | **Last Amended**: 2026-11-15
+**Version**: 1.0.1 | **Ratified**: 2026-11-15 | **Last Amended**: 2026-11-21
