@@ -68,10 +68,12 @@ const EDIT_SCOPE = {
   desenvolvedor: {
     // Reforça no cabeçalho o que no opencode era só regra de prompt.
     ok: (p) =>
+      !/^\.claude\//.test(p) &&
+      !/^\.github\/workflows\//.test(p) &&
       !/^\.specify\//.test(p) &&
       !/(^|\/)\.env(\.(?!example$)[^/]+)?$/.test(p) &&
       (!/^specs\//.test(p) || /^specs\/[^/]+\/tasks\.md$/.test(p) || NOTES.test(p)),
-    msg: "o Desenvolvedor não altera spec/plano/relatórios/.specify nem .env/.env.local (só .env.example); em specs/ só marca [X] em tasks.md",
+    msg: "o Desenvolvedor não altera spec/plano/relatórios/.specify nem .claude/, .github/workflows/ ou .env/.env.local (só .env.example); em specs/ só marca [X] em tasks.md",
   },
   qa: {
     ok: (p) =>
