@@ -1,0 +1,122 @@
+{
+  "feature": "001-dashboard-data-hora-atual",
+  "base_branch": "main",
+  "branch": "001-dashboard-data-hora-atual",
+  "gh_path": "/c/Program Files/GitHub CLI/gh.exe",
+  "pull_request": "https://github.com/liviagomes30/fabrica-petcontrol/pull/1",
+  "commands": {
+    "test": "npm --prefix petcontrol-next run test",
+    "coverage": "npm --prefix petcontrol-next run test:coverage",
+    "lint": "npm --prefix petcontrol-next run lint",
+    "build": "npm --prefix petcontrol-next run build"
+  },
+  "last_reviewed_commit": "e8903107970730fb057c4dfed3c5d29f4f6dee78",
+  "stage": "AGUARDANDO_MERGE",
+  "artifacts": {
+    "specs/001-dashboard-data-hora-atual/spec.md": "E1",
+    "specs/001-dashboard-data-hora-atual/checklists/requirements.md": "E1",
+    "specs/001-dashboard-data-hora-atual/plan.md": "E2",
+    "specs/001-dashboard-data-hora-atual/research.md": "E2",
+    "specs/001-dashboard-data-hora-atual/data-model.md": "E2",
+    "specs/001-dashboard-data-hora-atual/quickstart.md": "E2",
+    "specs/001-dashboard-data-hora-atual/contracts/data-local-api.md": "E2",
+    "specs/001-dashboard-data-hora-atual/contracts/relogio-brasilia-ui.md": "E2",
+    "specs/001-dashboard-data-hora-atual/tasks.md": "E3",
+    "specs/001-dashboard-data-hora-atual/notes/e4-roteiro-manual.md": "E4",
+    "specs/001-dashboard-data-hora-atual/review-report.md": "E5",
+    "specs/001-dashboard-data-hora-atual/qa-report.md": "E6",
+    "petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx": "E6",
+    "specs/001-dashboard-data-hora-atual/notes/e7-descricao-pr.md": "E7"
+  },
+  "gates": {
+    "E2": {
+      "devolucoes": 0,
+      "premissas": [
+        "Arquiteto: Vitest + jsdom + Testing Library como primeira config de testes (devDependencies only)",
+        "Arquiteto: cor text-red-700 (contraste ~6:1); tema escuro inexistente hoje (research P2)",
+        "Pendência P1: CI (.github/workflows) roda lint e build, não test; não alterado por regra do projeto; listar na descrição do PR",
+        "Pendência P3: script update-agent-context ausente; CLAUDE.md não atualizado com Vitest"
+      ]
+    },
+    "E3": {
+      "devolucoes": 0
+    },
+    "E3.5": {
+      "critical": 0,
+      "cobertura_fr": "7/7",
+      "premissas": [
+        "C1 (media): T007 deve cobrir tambem hojeLocal e dataParaISOLocal para atingir 100% de cobertura do arquivo; instrucao ao Desenvolvedor",
+        "I1 (baixa): T018 manual pode nao ser executavel por agente; QA cobre contraste e 360px"
+      ],
+      "obs": "check-prerequisites.ps1 negado pelo ambiente; analise feita lendo os artefatos"
+    },
+    "E4": {
+      "devolucoes": 0,
+      "fase_atual": null,
+      "fases_concluidas": [
+        "Setup",
+        "Foundational",
+        "US1",
+        "US2",
+        "Polish"
+      ],
+      "premissas": [
+        "Desenvolvedor: vitest ^3.2.7 (v4/v5 incompativeis com npm local/@types/node 20), @vitejs/plugin-react ^4.7.0, passWithNoTests temporario",
+        "Aviso de lint em coverage/ a corrigir via ignore no eslint.config.mjs"
+      ]
+    },
+    "E5": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "ressalvas": [
+        "B1 dateTime com segunda leitura do relogio (baixo)",
+        "B2 testes de troca de TZ nao confirmam efeito (baixo)",
+        "B3 .gitkeep sem uso (baixo)",
+        "S1 falta teste de hidratacao sem mismatch (sugestao)"
+      ]
+    },
+    "E6": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "nao_verificavel": "login real/Supabase, layout 360px, SC-003 visual, override de fuso no DevTools (qa-report secao 5)",
+      "revisao_testes_qa": "aprovado com ressalvas (T1-T5 baixo/sugestao)"
+    },
+    "E7": {
+      "devolucoes": 0,
+      "ci": "verde (Lint, build e testes)",
+      "obs": "P1 resolvida: ci.yml roda npm run test --if-present"
+    }
+  },
+  "tasks_done": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008",
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018"
+  ],
+  "blockers": [],
+  "human_checkpoints": {
+    "specification_review": {
+      "status": "aprovado",
+      "aprovado_em": "2026-11-21T11:42:18-03:00",
+      "mensagem": "Aprovo a especificação, pode seguir com o plano."
+    },
+    "merge_approval": {
+      "status": "pendente"
+    }
+  },
+  "updated_at": "2026-11-21T15:20:00-03:00"
+}
