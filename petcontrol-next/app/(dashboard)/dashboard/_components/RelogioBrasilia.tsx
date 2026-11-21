@@ -5,6 +5,7 @@ import {
   agora,
   formatarDataHoraBrasilia,
   msAteProximoSegundo,
+  saudacaoDaDataHoraBrasilia,
 } from "@/lib/domain/data-local";
 
 const MARCADOR = "--/--/---- --:--:--";
@@ -54,13 +55,21 @@ export function RelogioBrasilia() {
   );
 
   return (
-    <time
-      dateTime={texto === null ? undefined : agora().toISOString()}
-      aria-label="Data e hora atuais (horário de Brasília)"
-      data-testid="relogio-brasilia"
-      className="text-red-700 font-semibold tabular-nums whitespace-nowrap"
-    >
-      {texto ?? MARCADOR}
-    </time>
+    <div className="flex flex-col items-start sm:items-end">
+      <time
+        dateTime={texto === null ? undefined : agora().toISOString()}
+        aria-label="Data e hora atuais (horário de Brasília)"
+        data-testid="relogio-brasilia"
+        className="text-red-700 font-semibold tabular-nums whitespace-nowrap"
+      >
+        {texto ?? MARCADOR}
+      </time>
+      <p
+        data-testid="saudacao-dashboard"
+        className="text-sm font-medium text-gray-700 whitespace-nowrap min-h-5"
+      >
+        {texto === null ? "" : saudacaoDaDataHoraBrasilia(texto)}
+      </p>
+    </div>
   );
 }

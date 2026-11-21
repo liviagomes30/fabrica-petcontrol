@@ -21,7 +21,9 @@
     "specs/002-saudacao-dashboard/quickstart.md": "E2",
     "specs/002-saudacao-dashboard/contracts/saudacao-domain-api.md": "E2",
     "specs/002-saudacao-dashboard/contracts/saudacao-ui.md": "E2",
-    "specs/002-saudacao-dashboard/tasks.md": "E3"
+    "specs/002-saudacao-dashboard/tasks.md": "E3",
+    "petcontrol-next/tests/acceptance/dashboard-saudacao.test.tsx": "E4",
+    "petcontrol-next/tests/unit/dashboard/saudacao-dashboard.test.tsx": "E4"
   },
   "gates": {
     "E1": {
@@ -52,10 +54,11 @@
     },
     "E4": {
       "devolucoes": 0,
-      "fase_atual": "US1",
+      "fase_atual": "US2",
       "fases_concluidas": [
         "Setup",
-        "Foundational"
+        "Foundational",
+        "US1"
       ]
     }
   },
@@ -67,10 +70,16 @@
     "T005",
     "T006",
     "T007",
-    "T008"
+    "T008",
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013"
   ],
   "blockers": [
-    "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado"
+    "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado",
+    "E4/US1: subagente retornou 'placeholder' em vez do bloco de status; artefatos verificados no disco e comandos rodados pelo orquestrador (exit 0)"
   ],
   "human_checkpoints": {
     "specification_review": {
