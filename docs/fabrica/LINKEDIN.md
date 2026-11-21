@@ -19,6 +19,6 @@ Resultado: rodei a fábrica de ponta a ponta numa feature real (um relógio de d
 
 Código e documentação: https://github.com/liviagomes30/fabrica-petcontrol
 
-Obrigada ao professor @<nome do professor> pela disciplina e pelo material.
+Obrigada ao professor @André Augusto Menegassi pela disciplina e pelo material.
 
 #IA #AgenticAI #ClaudeCode #SoftwareEngineering #SpecKit #DevOps
