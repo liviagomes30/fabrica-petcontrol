@@ -2,7 +2,7 @@
   "feature": "002-saudacao-dashboard",
   "base_branch": "main",
   "branch": "002-saudacao-dashboard",
-  "gh_path": "/c/Program Files/GitHub CLI/gh.exe",
+  "gh_path": "gh",
   "pull_request": null,
   "commands": {
     "test": "npm --prefix petcontrol-next run test",
@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": "ba30c8e3afc7906a08e6e19633e0a13e93c937d1",
-  "stage": "TESTANDO",
+  "stage": "PUBLICANDO_PR",
   "artifacts": {
     "specs/002-saudacao-dashboard/spec.md": "E1",
     "specs/002-saudacao-dashboard/checklists/requirements.md": "E1",
@@ -79,7 +79,15 @@
         "Baixo: aceite escrito pelo Desenvolvedor; QA assume o arquivo",
         "Sugestao: teste 'exatamente um dos tres textos' redundante",
         "Sugestao: slice(11,13) por posicao fixa (R1 aceito no plano)"
-      ]
+      ],
+      "revisao_testes_qa": {
+        "parecer": "aprovado com ressalvas",
+        "ressalvas": [
+          "E6-1 Baixo: teste de hidratacao sem try/finally",
+          "E6-2 Baixo: JSDoc de horaBrasilia incorreto e usa Intl como a implementacao",
+          "E6-3 Sugestao: alguns testes acoplados a classes CSS/codigo-fonte"
+        ]
+      }
     },
     "E6": {
       "devolucoes": 0,
