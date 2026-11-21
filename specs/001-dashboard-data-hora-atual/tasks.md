@@ -39,10 +39,10 @@ description: "Lista de tarefas: Data e hora atuais no dashboard"
 
 **Purpose**: Configurar o Vitest (primeiro framework de testes do projeto; lacuna registrada na constituição).
 
-- [ ] T001 Instalar as `devDependencies` `vitest`, `@vitest/coverage-v8`, `jsdom`, `@testing-library/react`, `@testing-library/dom` e `@vitejs/plugin-react` em `petcontrol-next/package.json` (atualizando `petcontrol-next/package-lock.json` via `npm --prefix petcontrol-next install -D ...`); nenhuma dependência de runtime nova
-- [ ] T002 Adicionar os scripts `"test": "vitest run"` e `"test:coverage": "vitest run --coverage"` em `petcontrol-next/package.json` (mesmo arquivo de T001, executar depois dele)
-- [ ] T003 [P] Criar `petcontrol-next/vitest.config.mts` com `environment: "jsdom"`, plugin `@vitejs/plugin-react`, alias `@` apontando para a raiz de `petcontrol-next`, `include: ["tests/**/*.test.{ts,tsx}"]`, sem `globals`, `coverage.provider: "v8"`, `coverage.include: ["lib/domain/data-local.ts"]` e `coverage.thresholds` de 100% para linhas e funções
-- [ ] T004 Confirmar que os arquivos de teste em `petcontrol-next/tests/` entram no `include` de `petcontrol-next/tsconfig.json` e no lint (`petcontrol-next/eslint.config.mjs`), ajustando somente se necessário; criar as pastas `petcontrol-next/tests/unit/lib/domain/` e `petcontrol-next/tests/unit/dashboard/`
+- [X] T001 Instalar as `devDependencies` `vitest`, `@vitest/coverage-v8`, `jsdom`, `@testing-library/react`, `@testing-library/dom` e `@vitejs/plugin-react` em `petcontrol-next/package.json` (atualizando `petcontrol-next/package-lock.json` via `npm --prefix petcontrol-next install -D ...`); nenhuma dependência de runtime nova
+- [X] T002 Adicionar os scripts `"test": "vitest run"` e `"test:coverage": "vitest run --coverage"` em `petcontrol-next/package.json` (mesmo arquivo de T001, executar depois dele)
+- [X] T003 [P] Criar `petcontrol-next/vitest.config.mts` com `environment: "jsdom"`, plugin `@vitejs/plugin-react`, alias `@` apontando para a raiz de `petcontrol-next`, `include: ["tests/**/*.test.{ts,tsx}"]`, sem `globals`, `coverage.provider: "v8"`, `coverage.include: ["lib/domain/data-local.ts"]` e `coverage.thresholds` de 100% para linhas e funções
+- [X] T004 Confirmar que os arquivos de teste em `petcontrol-next/tests/` entram no `include` de `petcontrol-next/tsconfig.json` e no lint (`petcontrol-next/eslint.config.mjs`), ajustando somente se necessário; criar as pastas `petcontrol-next/tests/unit/lib/domain/` e `petcontrol-next/tests/unit/dashboard/`
 
 **Checkpoint**: `npm --prefix petcontrol-next run test` executa o Vitest (pode terminar sem testes ainda).
 
