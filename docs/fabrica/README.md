@@ -108,5 +108,5 @@ O Claude Code pede confirmação antes de acionar o Arquiteto (`ask`). Ao fim, o
 
 - [docs/ROTEIRO-DEMO.md](ROTEIRO-DEMO.md): passo a passo da demonstração e lista de prints para a apresentação.
 - [docs/LINKEDIN.md](LINKEDIN.md): rascunho do post de portfólio.
-- [docs/apresentacao-fabrica-claude-code.pptx](apresentacao-fabrica-claude-code.pptx): deck de 14 slides (arquitetura, conversão, permissões, fluxo, Slack). Os slides 10 a 12 têm molduras tracejadas "INSERIR PRINT N", numeradas como a tabela do roteiro; substitua pelas capturas reais da sua execução. Nos slides 1 e 14, troque `<link do repositório>` e `@<nome do professor>`.
+- [apresentacao-fabrica-claude-code.pptx](apresentacao-fabrica-claude-code.pptx): deck de 18 slides (arquitetura, conversão, permissões, fluxo, Slack, evidências reais e resultado). Os prints reais ficam em `img/`. Só o slide 14 ainda tem molduras tracejadas ("INSERIR PRINT N"), numeradas como a tabela do roteiro: 8 (confirmação do Arquiteto), 10 (guard recusando uma edição), 11 (avisos no Slack) e 13 (PR com CI verde). Esses dependem de uma execução ao vivo ou da página do GitHub.
 - `scripts/fabrica/origem-opencode/README-professor.md`: material original da aula.
