@@ -10,7 +10,7 @@
     "lint": "npm --prefix petcontrol-next run lint",
     "build": "npm --prefix petcontrol-next run build"
   },
-  "last_reviewed_commit": null,
+  "last_reviewed_commit": "e8903107970730fb057c4dfed3c5d29f4f6dee78",
   "stage": "TESTANDO",
   "artifacts": {
     "specs/001-dashboard-data-hora-atual/spec.md": "E1",
@@ -23,7 +23,9 @@
     "specs/001-dashboard-data-hora-atual/contracts/relogio-brasilia-ui.md": "E2",
     "specs/001-dashboard-data-hora-atual/tasks.md": "E3",
     "specs/001-dashboard-data-hora-atual/notes/e4-roteiro-manual.md": "E4",
-    "specs/001-dashboard-data-hora-atual/review-report.md": "E5"
+    "specs/001-dashboard-data-hora-atual/review-report.md": "E5",
+    "specs/001-dashboard-data-hora-atual/qa-report.md": "E6",
+    "petcontrol-next/tests/acceptance/dashboard-data-hora.test.tsx": "E6"
   },
   "gates": {
     "E2": {
@@ -71,6 +73,11 @@
         "B3 .gitkeep sem uso (baixo)",
         "S1 falta teste de hidratacao sem mismatch (sugestao)"
       ]
+    },
+    "E6": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "nao_verificavel": "login real/Supabase, layout 360px, SC-003 visual, override de fuso no DevTools (qa-report secao 5)"
     }
   },
   "tasks_done": [
@@ -104,5 +111,5 @@
       "status": "pendente"
     }
   },
-  "updated_at": "2026-11-21T14:10:00-03:00"
+  "updated_at": "2026-11-21T14:40:00-03:00"
 }
