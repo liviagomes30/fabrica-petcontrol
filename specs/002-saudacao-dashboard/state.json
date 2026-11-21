@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": null,
-  "stage": "IMPLEMENTANDO",
+  "stage": "REVISANDO",
   "artifacts": {
     "specs/002-saudacao-dashboard/spec.md": "E1",
     "specs/002-saudacao-dashboard/checklists/requirements.md": "E1",
@@ -23,7 +23,10 @@
     "specs/002-saudacao-dashboard/contracts/saudacao-ui.md": "E2",
     "specs/002-saudacao-dashboard/tasks.md": "E3",
     "petcontrol-next/tests/acceptance/dashboard-saudacao.test.tsx": "E4",
-    "petcontrol-next/tests/unit/dashboard/saudacao-dashboard.test.tsx": "E4"
+    "petcontrol-next/tests/unit/dashboard/saudacao-dashboard.test.tsx": "E4",
+    "specs/002-saudacao-dashboard/notes/e4-roteiro-manual.md": "E4",
+    "petcontrol-next/lib/domain/data-local.ts": "E4",
+    "petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx": "E4"
   },
   "gates": {
     "E1": {
@@ -54,12 +57,16 @@
     },
     "E4": {
       "devolucoes": 0,
-      "fase_atual": "Polish",
+      "fase_atual": null,
       "fases_concluidas": [
         "Setup",
         "Foundational",
         "US1",
-        "US2"
+        "US2",
+        "Polish"
+      ],
+      "premissas": [
+        "Desenvolvedor: T020 so parcialmente verificavel por agente (contraste 10,31:1 e 9,86:1 calculado; itens de navegador/fuso real/aba oculta/logout ficam para QA ou humano)"
       ]
     }
   },
@@ -80,7 +87,10 @@
     "T014",
     "T015",
     "T016",
-    "T017"
+    "T017",
+    "T018",
+    "T019",
+    "T020"
   ],
   "blockers": [
     "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado",

@@ -85,9 +85,9 @@ description: "Lista de tarefas: Saudação por período do dia no dashboard"
 
 **Purpose**: Verificação final e cobertura de requisitos.
 
-- [ ] T018 Rodar `npm --prefix petcontrol-next run lint` e `npm --prefix petcontrol-next run build` e corrigir qualquer violação nos arquivos alterados (sem `setState` em efeito, sem `any`/`as`, sem `new Date()` novo) (depende de T017)
-- [ ] T019 Rodar `npm --prefix petcontrol-next run test:coverage` e confirmar 100% de linhas e funções em `petcontrol-next/lib/domain/data-local.ts` (depende de T017)
-- [ ] T020 Validar manualmente o roteiro de `specs/002-saudacao-dashboard/quickstart.md` (posição, faixas, fusos, tela de 360 px sem quebra de linha, contraste 4,5:1) e registrar o resultado no retorno ao orquestrador, sem editar o quickstart (depende de T018)
+- [X] T018 Rodar `npm --prefix petcontrol-next run lint` e `npm --prefix petcontrol-next run build` e corrigir qualquer violação nos arquivos alterados (sem `setState` em efeito, sem `any`/`as`, sem `new Date()` novo) (depende de T017)
+- [X] T019 Rodar `npm --prefix petcontrol-next run test:coverage` e confirmar 100% de linhas e funções em `petcontrol-next/lib/domain/data-local.ts` (depende de T017)
+- [X] T020 Validar manualmente o roteiro de `specs/002-saudacao-dashboard/quickstart.md` (posição, faixas, fusos, tela de 360 px sem quebra de linha, contraste 4,5:1) e registrar o resultado no retorno ao orquestrador, sem editar o quickstart (depende de T018)
 
 ---
 
