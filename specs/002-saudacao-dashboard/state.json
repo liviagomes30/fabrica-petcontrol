@@ -52,11 +52,16 @@
     },
     "E4": {
       "devolucoes": 0,
-      "fase_atual": null,
-      "fases_concluidas": []
+      "fase_atual": "Foundational",
+      "fases_concluidas": [
+        "Setup"
+      ]
     }
   },
-  "tasks_done": [],
+  "tasks_done": [
+    "T001",
+    "T002"
+  ],
   "blockers": [
     "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado"
   ],

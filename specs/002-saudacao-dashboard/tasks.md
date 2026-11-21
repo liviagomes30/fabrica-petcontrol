@@ -24,8 +24,8 @@ description: "Lista de tarefas: Saudação por período do dia no dashboard"
 
 **Purpose**: Confirmar a linha de base. Sem dependências novas, sem variáveis de ambiente, sem migração.
 
-- [ ] T001 Instalar dependências com `npm --prefix petcontrol-next ci` e confirmar a linha de base verde (`run test`, `run lint`, `run build` com código 0) antes de alterar qualquer arquivo
-- [ ] T002 [P] Ler `petcontrol-next/lib/domain/data-local.ts`, `petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx`, `petcontrol-next/tests/unit/lib/domain/data-local.test.ts` e `petcontrol-next/tests/unit/dashboard/relogio-brasilia.test.tsx` para reaproveitar helpers de teste (fake timers, troca de `process.env.TZ`) e o padrão do snapshot `useSyncExternalStore`; nenhuma alteração de arquivo
+- [X] T001 Instalar dependências com `npm --prefix petcontrol-next ci` e confirmar a linha de base verde (`run test`, `run lint`, `run build` com código 0) antes de alterar qualquer arquivo
+- [X] T002 [P] Ler `petcontrol-next/lib/domain/data-local.ts`, `petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx`, `petcontrol-next/tests/unit/lib/domain/data-local.test.ts` e `petcontrol-next/tests/unit/dashboard/relogio-brasilia.test.tsx` para reaproveitar helpers de teste (fake timers, troca de `process.env.TZ`) e o padrão do snapshot `useSyncExternalStore`; nenhuma alteração de arquivo
 
 ---
 
