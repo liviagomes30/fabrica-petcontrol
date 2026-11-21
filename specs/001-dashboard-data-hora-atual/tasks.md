@@ -54,7 +54,7 @@ description: "Lista de tarefas: Data e hora atuais no dashboard"
 
 **CRITICAL**: nenhuma história começa antes desta fase.
 
-- [ ] T005 Em `petcontrol-next/lib/domain/data-local.ts`, acrescentar `export const FUSO_BRASILIA = "America/Sao_Paulo"` e `export function agora(): Date` (único ponto novo que lê o relógio do dispositivo), mantendo `hojeLocal()` e `dataParaISOLocal()` inalteradas (contrato `contracts/data-local-api.md`)
+- [X] T005 Em `petcontrol-next/lib/domain/data-local.ts`, acrescentar `export const FUSO_BRASILIA = "America/Sao_Paulo"` e `export function agora(): Date` (único ponto novo que lê o relógio do dispositivo), mantendo `hojeLocal()` e `dataParaISOLocal()` inalteradas (contrato `contracts/data-local-api.md`)
 
 **Checkpoint**: base pronta; US1 pode iniciar.
 

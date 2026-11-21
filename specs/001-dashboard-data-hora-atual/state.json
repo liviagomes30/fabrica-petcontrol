@@ -47,9 +47,10 @@
     },
     "E4": {
       "devolucoes": 0,
-      "fase_atual": "Foundational",
+      "fase_atual": "US1",
       "fases_concluidas": [
-        "Setup"
+        "Setup",
+        "Foundational"
       ],
       "premissas": [
         "Desenvolvedor: vitest ^3.2.7 (v4/v5 incompativeis com npm local/@types/node 20), @vitejs/plugin-react ^4.7.0, passWithNoTests temporario",
@@ -61,7 +62,8 @@
     "T001",
     "T002",
     "T003",
-    "T004"
+    "T004",
+    "T005"
   ],
   "blockers": [],
   "human_checkpoints": {
@@ -74,5 +76,5 @@
       "status": "pendente"
     }
   },
-  "updated_at": "2026-11-21T12:30:00-03:00"
+  "updated_at": "2026-11-21T12:45:00-03:00"
 }

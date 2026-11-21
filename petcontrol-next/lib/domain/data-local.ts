@@ -14,3 +14,10 @@ export function dataParaISOLocal(data: Date): string {
   const dia = String(data.getDate()).padStart(2, "0");
   return `${ano}-${mes}-${dia}`;
 }
+
+export const FUSO_BRASILIA = "America/Sao_Paulo";
+
+/** Único ponto novo que lê o relógio do dispositivo. */
+export function agora(): Date {
+  return new Date();
+}
