@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": "e8903107970730fb057c4dfed3c5d29f4f6dee78",
-  "stage": "AGUARDANDO_MERGE",
+  "stage": "ENTREGUE",
   "artifacts": {
     "specs/001-dashboard-data-hora-atual/spec.md": "E1",
     "specs/001-dashboard-data-hora-atual/checklists/requirements.md": "E1",
@@ -115,8 +115,10 @@
       "mensagem": "Aprovo a especificação, pode seguir com o plano."
     },
     "merge_approval": {
-      "status": "pendente"
+      "status": "aprovado",
+      "mergedAt": "2026-11-21T15:50:39Z",
+      "obs": "PR #1 com state MERGED, confirmado via gh pr view"
     }
   },
-  "updated_at": "2026-11-21T15:20:00-03:00"
+  "updated_at": "2026-11-21T16:00:00-03:00"
 }
