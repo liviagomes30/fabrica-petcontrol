@@ -54,11 +54,12 @@
     },
     "E4": {
       "devolucoes": 0,
-      "fase_atual": "US2",
+      "fase_atual": "Polish",
       "fases_concluidas": [
         "Setup",
         "Foundational",
-        "US1"
+        "US1",
+        "US2"
       ]
     }
   },
@@ -75,7 +76,11 @@
     "T010",
     "T011",
     "T012",
-    "T013"
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017"
   ],
   "blockers": [
     "Arquivo temporario ~$apresentacao-fabrica-claude-code.pptx (lock do PowerPoint) untracked na raiz de docs/fabrica; fora do escopo, nao commitado",

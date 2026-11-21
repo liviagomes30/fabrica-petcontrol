@@ -72,10 +72,10 @@ description: "Lista de tarefas: Saudação por período do dia no dashboard"
 
 ### Implementation for User Story 2
 
-- [ ] T014 [US2] Verificar em `petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx` que a saudação deriva exclusivamente do snapshot do relógio, de modo que o tique de 1 s e o `visibilitychange` existentes já atualizam relógio e saudação no mesmo render, sem temporizador ou listener novo (D3, D4); alterar o arquivo só se houver divergência em relação a T010 (depende de T010)
-- [ ] T015 [P] [US2] Estender `petcontrol-next/tests/unit/dashboard/saudacao-dashboard.test.tsx` com testes das três viradas sincronizadas (11:59:59 para 12:00:00, 17:59:59 para 18:00:00, 04:59:59 para 05:00:00) afirmando relógio e saudação no mesmo `act`; `vi.getTimerCount() === 1`; `visibilitychange` com `visibilityState === "visible"` corrigindo relógio e saudação juntos; desmontagem sem timers nem listeners restantes (depende de T011, mesmo arquivo)
-- [ ] T016 [P] [US2] Estender `petcontrol-next/tests/acceptance/dashboard-saudacao.test.tsx` (QA) com um bloco `describe` para US2 e um teste por cenário de aceite 1 a 3 (Bom dia para Boa tarde, Boa tarde para Boa noite, Boa noite para Bom dia, sem recarregar) (depende de T012, mesmo arquivo)
-- [ ] T017 [US2] Rodar `npm --prefix petcontrol-next run test` e confirmar que todos os testes (001 e 002) passam (depende de T014, T015, T016)
+- [X] T014 [US2] Verificar em `petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx` que a saudação deriva exclusivamente do snapshot do relógio, de modo que o tique de 1 s e o `visibilitychange` existentes já atualizam relógio e saudação no mesmo render, sem temporizador ou listener novo (D3, D4); alterar o arquivo só se houver divergência em relação a T010 (depende de T010)
+- [X] T015 [P] [US2] Estender `petcontrol-next/tests/unit/dashboard/saudacao-dashboard.test.tsx` com testes das três viradas sincronizadas (11:59:59 para 12:00:00, 17:59:59 para 18:00:00, 04:59:59 para 05:00:00) afirmando relógio e saudação no mesmo `act`; `vi.getTimerCount() === 1`; `visibilitychange` com `visibilityState === "visible"` corrigindo relógio e saudação juntos; desmontagem sem timers nem listeners restantes (depende de T011, mesmo arquivo)
+- [X] T016 [P] [US2] Estender `petcontrol-next/tests/acceptance/dashboard-saudacao.test.tsx` (QA) com um bloco `describe` para US2 e um teste por cenário de aceite 1 a 3 (Bom dia para Boa tarde, Boa tarde para Boa noite, Boa noite para Bom dia, sem recarregar) (depende de T012, mesmo arquivo)
+- [X] T017 [US2] Rodar `npm --prefix petcontrol-next run test` e confirmar que todos os testes (001 e 002) passam (depende de T014, T015, T016)
 
 **Checkpoint**: US1 e US2 funcionam e são testáveis independentemente.
 
