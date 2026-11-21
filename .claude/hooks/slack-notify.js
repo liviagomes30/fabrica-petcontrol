@@ -42,11 +42,44 @@ function git(cmd) {
   }
 }
 
+// Subagentes em background entregam o relatório pela ferramenta SubagentHandback (campo message),
+// e last_assistant_message chega vazio. O payload traz agent_transcript_path: lê o último handback de lá.
+function ultimoRelatorio(input) {
+  const p = input.agent_transcript_path;
+  if (!p) return "";
+  try {
+    let achado = "";
+    for (const l of fs.readFileSync(p, "utf8").split("\n")) {
+      if (!l.includes("SubagentHandback")) continue;
+      let j;
+      try { j = JSON.parse(l); } catch { continue; }
+      const c = j.message && j.message.content;
+      if (!Array.isArray(c)) continue;
+      for (const b of c) {
+        if (b.type === "tool_use" && b.name === "SubagentHandback" && b.input && typeof b.input.message === "string") achado = b.input.message;
+      }
+    }
+    return achado;
+  } catch {
+    return "";
+  }
+}
+
 function buildMessage(input) {
-  const text = String(input.last_assistant_message || "");
+  let text = String(input.last_assistant_message || "");
+  let fonte = "mensagem final";
+  if (!field(text, "STATUS")) {
+    const r = ultimoRelatorio(input);
+    if (r) {
+      text = r;
+      fonte = "SubagentHandback";
+    }
+  }
   const agent = input.agent_type || "subagente";
   const status = field(text, "STATUS") || "sem bloco STATUS";
-  const parecer = field(text, "PARECER");
+  const parecerBruto = field(text, "PARECER");
+  const mp = parecerBruto && parecerBruto.match(/^(aprovado com ressalvas|aprovado|reprovado)/i);
+  const parecer = mp ? mp[1].toLowerCase() : null; // só os três valores do contrato
   const bloqueios = field(text, "BLOQUEIOS");
   const proximo = field(text, "PRÓXIMO") || field(text, "PROXIMO");
   const ok = /^DONE|^HUMAN_REVIEW_REQUIRED/i.test(status) && !/reprovado/i.test(parecer || "");
@@ -68,7 +101,7 @@ function buildMessage(input) {
   if (branch) lines.push(`• Branch: \`${branch}\``);
   if (bloqueios && !/^nenhum$/i.test(bloqueios)) lines.push(`• Bloqueios: ${bloqueios}`);
   if (proximo) lines.push(`• Próximo: ${proximo}`);
-  const diag = { chaves: Object.keys(input), tamanho_msg: text.length }; return { agent, status, parecer, branch, diag, text: lines.join("\n") };
+  const diag = { chaves: Object.keys(input), tamanho_msg: text.length, fonte }; return { agent, status, parecer, branch, diag, text: lines.join("\n") };
 }
 
 async function main(input) {
