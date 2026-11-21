@@ -11,3 +11,7 @@
 # Dependências e IDE
 node_modules/
 .idea/
+
+# Arquivos temporários de editores (o PowerPoint cria ~$arquivo.pptx enquanto o deck está aberto)
+~$*
+.~lock.*#
