@@ -4,12 +4,24 @@
   "branch": "002-saudacao-dashboard",
   "gh_path": "/c/Program Files/GitHub CLI/gh.exe",
   "pull_request": null,
-  "commands": {},
+  "commands": {
+    "test": "npm --prefix petcontrol-next run test",
+    "coverage": "npm --prefix petcontrol-next run test:coverage",
+    "lint": "npm --prefix petcontrol-next run lint",
+    "build": "npm --prefix petcontrol-next run build"
+  },
   "last_reviewed_commit": null,
-  "stage": "PLANEJANDO",
+  "stage": "IMPLEMENTANDO",
   "artifacts": {
     "specs/002-saudacao-dashboard/spec.md": "E1",
-    "specs/002-saudacao-dashboard/checklists/requirements.md": "E1"
+    "specs/002-saudacao-dashboard/checklists/requirements.md": "E1",
+    "specs/002-saudacao-dashboard/plan.md": "E2",
+    "specs/002-saudacao-dashboard/research.md": "E2",
+    "specs/002-saudacao-dashboard/data-model.md": "E2",
+    "specs/002-saudacao-dashboard/quickstart.md": "E2",
+    "specs/002-saudacao-dashboard/contracts/saudacao-domain-api.md": "E2",
+    "specs/002-saudacao-dashboard/contracts/saudacao-ui.md": "E2",
+    "specs/002-saudacao-dashboard/tasks.md": "E3"
   },
   "gates": {
     "E1": {
@@ -17,6 +29,31 @@
       "premissas": [
         "Analista: faixas de horario (bom dia 05:00-11:59, boa tarde 12:00-17:59, boa noite 18:00-04:59) assumidas como premissa na spec"
       ]
+    },
+    "E2": {
+      "devolucoes": 0,
+      "premissas": [
+        "Arquiteto: saudação como função pura em lib/domain/data-local.ts, exibida pelo RelogioBrasilia a partir do mesmo valor do relógio",
+        "Arquiteto: estilo text-sm font-medium text-gray-700 (contraste ~10:1)",
+        "update-agent-context ausente; contexto do agente não atualizado"
+      ]
+    },
+    "E3": {
+      "devolucoes": 0
+    },
+    "E3.5": {
+      "critical": 0,
+      "cobertura_fr": "9/9",
+      "premissas": [
+        "C1 (media): T012/T016 (aceite) criados pelo Desenvolvedor em E4 como versao inicial; QA valida e amplia em E6",
+        "I1 (baixa): T020 manual pode nao ser executavel por agente; QA cobre contraste e 360px",
+        "analise feita lendo os artefatos (check-prerequisites negado)"
+      ]
+    },
+    "E4": {
+      "devolucoes": 0,
+      "fase_atual": null,
+      "fases_concluidas": []
     }
   },
   "tasks_done": [],
