@@ -27,7 +27,8 @@
     "specs/002-saudacao-dashboard/notes/e4-roteiro-manual.md": "E4",
     "petcontrol-next/lib/domain/data-local.ts": "E4",
     "petcontrol-next/app/(dashboard)/dashboard/_components/RelogioBrasilia.tsx": "E4",
-    "specs/002-saudacao-dashboard/review-report.md": "E5"
+    "specs/002-saudacao-dashboard/review-report.md": "E5",
+    "specs/002-saudacao-dashboard/qa-report.md": "E6"
   },
   "gates": {
     "E1": {
@@ -78,6 +79,15 @@
         "Baixo: aceite escrito pelo Desenvolvedor; QA assume o arquivo",
         "Sugestao: teste 'exatamente um dos tres textos' redundante",
         "Sugestao: slice(11,13) por posicao fixa (R1 aceito no plano)"
+      ]
+    },
+    "E6": {
+      "devolucoes": 0,
+      "parecer": "aprovado com ressalvas",
+      "ressalvas": [
+        "Itens de navegador do quickstart 3.1, 3.3-3.9 nao verificados por agente; humano deve executar (atencao 3.7 e 3.9) antes do merge",
+        "Aviso DYNAMIC_SERVER_USAGE em /produtos no build, fora do escopo, nao verificado na main",
+        "Testes em jsdom: contraste e layout verificados por tokens/classes"
       ]
     }
   },
