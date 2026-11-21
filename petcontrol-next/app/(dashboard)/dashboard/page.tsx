@@ -6,6 +6,7 @@ import {
 import { type ProximoCompromisso, ESTATISTICAS_VAZIAS } from "../_actions/dashboard.types";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { RelogioBrasilia } from "./_components/RelogioBrasilia";
 import {
   PawPrint,
   Syringe,
@@ -83,13 +84,16 @@ export default async function DashboardPage() {
   return (
     <div className="container mx-auto py-8 px-4">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">
-          Bem-vindo ao PetControl 🐾
-        </h1>
-        <p className="text-gray-600 mt-1">
-          Painel de controle da ONG SalvaCão
-        </p>
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Bem-vindo ao PetControl 🐾
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Painel de controle da ONG SalvaCão
+          </p>
+        </div>
+        <RelogioBrasilia />
       </div>
 
       {/* Estatísticas Principais */}

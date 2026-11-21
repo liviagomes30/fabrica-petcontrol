@@ -10,8 +10,6 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     include: ["tests/**/*.test.{ts,tsx}"],
-    // Fase Setup ainda não tem testes; remover quando US1 criar o primeiro.
-    passWithNoTests: true,
     coverage: {
       provider: "v8",
       include: ["lib/domain/data-local.ts"],
