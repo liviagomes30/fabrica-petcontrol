@@ -99,10 +99,10 @@ Cobre: FR-005 (SC-001, SC-004) e as bordas de virada de dia e aba em segundo pla
 
 **Purpose**: Verificação final e conformidade com a constituição.
 
-- [ ] T015 Rodar `npm --prefix petcontrol-next run test` e `npm --prefix petcontrol-next run test:coverage`; corrigir falhas e garantir 100% de linhas e funções em `petcontrol-next/lib/domain/data-local.ts` (se a troca de `TZ` for instável no Windows, aplicar a mitigação R2 do plano sem alterar o critério)
-- [ ] T016 Rodar `npm --prefix petcontrol-next run lint` e `npm --prefix petcontrol-next run build` e corrigir apontamentos nos arquivos desta feature (inclui checagem de tipos e a regra `react-hooks/set-state-in-effect`)
-- [ ] T017 [P] Revisar o diff para garantir: nenhuma chamada de rede/Server Action/escrita no componente (FR-006), `RelogioBrasilia` usado apenas em `petcontrol-next/app/(dashboard)/dashboard/page.tsx` (FR-007), nenhum `new Date()` novo fora de `petcontrol-next/lib/domain/data-local.ts`, `.github/workflows/` e `.env.local` intocados
-- [ ] T018 Executar o roteiro manual de `specs/001-dashboard-data-hora-atual/quickstart.md` (seções 3.1 a 3.8, incluindo contraste >= 4,5:1 sobre `bg-gray-50` e `bg-white`, tela de 360 px e dispositivo em outro fuso) e registrar o resultado no retorno ao orquestrador
+- [X] T015 Rodar `npm --prefix petcontrol-next run test` e `npm --prefix petcontrol-next run test:coverage`; corrigir falhas e garantir 100% de linhas e funções em `petcontrol-next/lib/domain/data-local.ts` (se a troca de `TZ` for instável no Windows, aplicar a mitigação R2 do plano sem alterar o critério)
+- [X] T016 Rodar `npm --prefix petcontrol-next run lint` e `npm --prefix petcontrol-next run build` e corrigir apontamentos nos arquivos desta feature (inclui checagem de tipos e a regra `react-hooks/set-state-in-effect`)
+- [X] T017 [P] Revisar o diff para garantir: nenhuma chamada de rede/Server Action/escrita no componente (FR-006), `RelogioBrasilia` usado apenas em `petcontrol-next/app/(dashboard)/dashboard/page.tsx` (FR-007), nenhum `new Date()` novo fora de `petcontrol-next/lib/domain/data-local.ts`, `.github/workflows/` e `.env.local` intocados
+- [X] T018 Executar o roteiro manual de `specs/001-dashboard-data-hora-atual/quickstart.md` (seções 3.1 a 3.8, incluindo contraste >= 4,5:1 sobre `bg-gray-50` e `bg-white`, tela de 360 px e dispositivo em outro fuso) e registrar o resultado no retorno ao orquestrador
 
 ---
 

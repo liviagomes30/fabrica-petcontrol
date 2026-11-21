@@ -11,7 +11,7 @@
     "build": "npm --prefix petcontrol-next run build"
   },
   "last_reviewed_commit": null,
-  "stage": "IMPLEMENTANDO",
+  "stage": "REVISANDO",
   "artifacts": {
     "specs/001-dashboard-data-hora-atual/spec.md": "E1",
     "specs/001-dashboard-data-hora-atual/checklists/requirements.md": "E1",
@@ -21,7 +21,8 @@
     "specs/001-dashboard-data-hora-atual/quickstart.md": "E2",
     "specs/001-dashboard-data-hora-atual/contracts/data-local-api.md": "E2",
     "specs/001-dashboard-data-hora-atual/contracts/relogio-brasilia-ui.md": "E2",
-    "specs/001-dashboard-data-hora-atual/tasks.md": "E3"
+    "specs/001-dashboard-data-hora-atual/tasks.md": "E3",
+    "specs/001-dashboard-data-hora-atual/notes/e4-roteiro-manual.md": "E4"
   },
   "gates": {
     "E2": {
@@ -47,12 +48,13 @@
     },
     "E4": {
       "devolucoes": 0,
-      "fase_atual": "Polish",
+      "fase_atual": null,
       "fases_concluidas": [
         "Setup",
         "Foundational",
         "US1",
-        "US2"
+        "US2",
+        "Polish"
       ],
       "premissas": [
         "Desenvolvedor: vitest ^3.2.7 (v4/v5 incompativeis com npm local/@types/node 20), @vitejs/plugin-react ^4.7.0, passWithNoTests temporario",
@@ -74,7 +76,11 @@
     "T011",
     "T012",
     "T013",
-    "T014"
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018"
   ],
   "blockers": [],
   "human_checkpoints": {
@@ -87,5 +93,5 @@
       "status": "pendente"
     }
   },
-  "updated_at": "2026-11-21T13:30:00-03:00"
+  "updated_at": "2026-11-21T13:50:00-03:00"
 }
